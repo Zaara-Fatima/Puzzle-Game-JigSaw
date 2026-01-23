@@ -20,7 +20,7 @@ export const ShowImg = () => {
 
 
 <div>
-{click && <div className='w-[200px] h-[200px]'><img src={selectedPuzzle}></img></div>}</div>
+{click && <div  className="absolute top-6 left-16 z-50"><img src={selectedPuzzle} className='md:w-[200px] md:h-[200px] rounded-lg shadow-lg '></img></div>}</div>
 </div>
   )
 }
