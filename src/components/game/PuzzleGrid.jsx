@@ -76,28 +76,27 @@ export default function PuzzleGrid({
     }
   }, [isSolved, hasPlayedWinSound]);
 
-    let width,height;
-  if(gridSize==3){
-    width=300;
-    height=300;
+  //   let width,height;
+  // if(gridSize==3){
+  //   width=30;
+  //   height=30;
     
-  }else if(gridSize==4){
-      width=400;
-     height=400;
+  // }else if(gridSize==4){
+  //     width=30;
+  //    height=5;
     
-  }
+  // }
 
   return (
-    <div className="relative flex flex-row justify-center items-center ">
+    <div className=" flex flex-row justify-center items-center ">
       {/* < Shuffle onShuffle={()=>handleShuffle()}/> */}
       <div
-        className="grid  rounded"
-        style={{
-          width: `${width}px`,
-          height: `${height}px`,
-          gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-          gridAutoRows: `1fr`,
-        }}
+        className="grid gap-0 rounded"
+          style={{
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+    width: 'clamp(100px, 50vmin, 350px)',
+    aspectRatio: '1 / 1',
+  }}
       >
         {board.map((tile, i) => (
           <GridCell
@@ -110,11 +109,7 @@ export default function PuzzleGrid({
           />
         ))}
       </div>
-      <TileTray
-        availableTiles={availableTiles}
-        imageSrc={imageSrc}
-        gridSize={gridSize}
-      />
+      
       {isSolved && (
         <div>
           <audio ref={audioRef} src={defaultSounds[0]} />
