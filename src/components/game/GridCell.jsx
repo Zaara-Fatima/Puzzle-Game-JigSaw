@@ -12,20 +12,19 @@ export default function GridCell({ cellIndex, placedTile, imageSrc, gridSize, on
 
   let width,height;
   if(gridSize==3){
-    width=300;
-    height=300;
+    width=30;
+    height=30;
     
   }else if(gridSize==4){
-      width=400;
-     height=400;
+      width=40;
+     height=40;
     
   }
 
   return (
     <div
       ref={dropRef}
-      className="border border-white bg-gray-700 flex items-center justify-center"
-      style={{ width: `${width/ gridSize}%`, height: `${height / gridSize}%` }}
+      className="border border-white bg-gray-700 flex items-center justify-center aspect-square"
     >
       {placedTile !== null && (
         <PuzzleTile
