@@ -7,6 +7,7 @@ import { defaultImages, defaultSvg } from "../assets/assets";
 import { useLocation, useNavigate } from "react-router-dom";
 import PuzzleGrid from "../components/game/PuzzleGrid";
 import { SelectPuzzle } from "./SelectPuzzle";
+import TileTray from "../components/game/TileTray";
 
 export const Game = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const Game = () => {
   return (
     <div>
       <div
-        className="flex flex-col items-center justify-center relative h-screen  bg-[#7DC383] text-center"
+        className="grid md:grid-cols-3 grid-rows-[auto] place-items-center w-full min-h-screen bg-[#7DC383] text-center"
         style={{
           backgroundColor: "#7dc383",
           backgroundImage:
@@ -52,10 +53,12 @@ export const Game = () => {
           backgroundRepeat: "repeat",
         }}
       >
-        <div className="flex flex-row justify-between items-center top-[5px] absolute min-w-full ">
-        <Header onClick={() => navigate("/setting")} />
-        </div>
-        <div className="flex gap-4 justify-center items-center  absolute top-[150px]  left-[700px]">
+        <Header className="fixed top-[5%]" onClick={() => navigate("/setting")} />
+
+        
+        <div className="md:col-span-2 mt-20 ">
+        <PuzzlePreview className="bg-[#DCCE99] md:w-[50vw] w-[65vw] md:h-[58vh] h-[40vh] rounded-xl relative shadow-[inset_2px_2px_2px_rgba(0,0,0,0.3)] place-content-center-safe flex flex-col gap-4" >
+           <div className="flex gap-4 justify-center items-center md:ml-30 ml-20 relative">
           {defaultSvg.map((Svg, i) => {
             console.log("Rendering icon:", Svg.name || Svg);
             let onClickHandler;
@@ -69,19 +72,18 @@ export const Game = () => {
             return (
               <Icon
                 key={i}
-                className=" rounded-full bg-[#699C78] w-[25px] h-[25px] p-1 z-10 text-white"
+                className=" rounded-full bg-[#699C78]  w-[20px]  md:w-[2vw] md:h-[2vw] p-1 z-20 text-white"
                 svg={<Svg onClick={onClickHandler} />}
               />
             );
           })}
-        </div>
+          </div>
         
-        <div>
-        <PuzzlePreview className="bg-[#DCCE99] w-[750px] h-[450px] rounded-xl absolute left-[100px] top-[125px] shadow-[inset_2px_2px_2px_rgba(0,0,0,0.3)]" />
+        
         {!selectedPuzzle ? (
-          <div className="absolute z-10">No Puzzle Selected please Select a puzzle</div>
+          <div className="sticky z-10">No Puzzle Selected please Select a puzzle</div>
         ) : (
-          <div className="absolute z-10 bg-[#699C78] left-[250px] top-[150px]">
+          <div className=" z-10 ">
             <PuzzleGrid
               imageSrc={selectedPuzzle}
               board={board}
@@ -92,13 +94,20 @@ export const Game = () => {
             />
           </div>
         )}
+        </PuzzlePreview>
         </div>
         <div>
         <SelectPuzzlePiece
-          className="right-[75px] absolute top-[125px]"
+          className="md:w-[30vw] w-[70vw] md:h-[45vh] h-[40vh] md:mr-4"
           text="Select Puzzle Pieces"
-          className1="w-[400px] h-[450px]"
-        />
+         >
+          {selectedPuzzle? ( <TileTray
+                  availableTiles={availableTiles}
+                  imageSrc={selectedPuzzle}
+                  gridSize={gridSize}
+                />):( <h1 className="font-bold text-white z-10">Please Select a Puzzle</h1>)}
+          
+          </SelectPuzzlePiece>
         </div>
       </div>
     </div>
