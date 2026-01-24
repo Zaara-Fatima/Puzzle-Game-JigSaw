@@ -98,13 +98,15 @@ export const Game = () => {
         </div>
         <div>
         <SelectPuzzlePiece
-          className="md:w-[30vw] w-[70vw] md:h-[45vh] h-[40vh] md:mr-4"
+          className="md:w-[30vw] w-[70vw] md:h-[45vh] h-[40vh] md:mr-4 overflow-y-scroll"
           text="Select Puzzle Pieces"
          >
           {selectedPuzzle? ( <TileTray
                   availableTiles={availableTiles}
                   imageSrc={selectedPuzzle}
                   gridSize={gridSize}
+                  setAvailableTiles={setAvailableTiles}
+                  setBoard={setBoard}
                 />):( <h1 className="font-bold text-white z-10">Please Select a Puzzle</h1>)}
           
           </SelectPuzzlePiece>
